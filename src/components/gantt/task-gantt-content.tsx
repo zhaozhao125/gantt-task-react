@@ -116,7 +116,9 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = memo(
     const [isMoving, setIsMoving] = useState(false);
     // 是否正在连线
     const [jsPlumbInstance, setJsPlumbInstance] = useState<any>(null);
-    const { ganttConfig } = useContext(GanttConfigContext);
+    const { ganttConfig, systemItemLinkDetail } = useContext(
+      GanttConfigContext
+    );
     const [pointInited, setPointInited] = useState(false);
     const taskLengthRef = useRef(0);
 
@@ -351,6 +353,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = memo(
     );
     const getLinkTypeId = useCallback(
       (start: string, end: string) => {
+        console.log(start, "start");
         const linkType = relationReverse(start, end);
         return (ganttConfig.relation ?? {})[linkType];
       },
@@ -453,6 +456,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = memo(
           }
           const taskSource = filter(tasks, { id: conn.sourceId })[0];
           const taskTarget = filter(tasks, { id: conn.targetId })[0];
+
           if (!ganttConfig.relation) {
             message.warning(t("errorMessage.noRelation"));
             return;
@@ -474,6 +478,40 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = memo(
             conn.connection.endpoints[0].anchor.cssClass,
             conn.dropEndpoint.anchor.cssClass
           );
+          const linkTypeName = relationReverse(
+            conn.connection.endpoints[0].anchor.cssClass,
+            conn.dropEndpoint.anchor.cssClass
+          );
+          const currentLinkType = systemItemLinkDetail?.[linkTypeName];
+
+          if (currentLinkType) {
+            const sourceItemType = taskSource?.item?.itemType.objectId;
+            console.log("sourceItemType: ", sourceItemType);
+            const targetItemType = taskTarget?.item?.itemType.objectId;
+            console.log("targetItemType: ", targetItemType);
+            console.log(linkTypeName, "linkTypeName");
+            if (
+              currentLinkType.inwardItemTypeMappings?.length &&
+              !currentLinkType.inwardItemTypeMappings?.includes(sourceItemType)
+            ) {
+              message.warning("开始有误");
+              // message.warning(t("errorMessage.connectionErrorParent"));
+              return;
+            }
+
+            if (
+              currentLinkType.outwardItemTypeMappings?.length &&
+              !currentLinkType.outwardItemTypeMappings?.includes(targetItemType)
+            ) {
+              message.warning("结束有误");
+              // message.warning(t("errorMessage.connectionErrorParent"));
+              return;
+            }
+          }
+
+          // if() {
+
+          // }
           const currentLink = itemLinks?.filter((ele: any) => {
             return (
               ele.source?.objectId === conn?.sourceId &&

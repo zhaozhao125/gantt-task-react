@@ -267,6 +267,7 @@ export interface GanttProps
   configVisibleChange?: (val: boolean) => void;
   tableQuerySelector?: string;
   workFlowStatusColor?: WorkFlowStatusColor;
+  systemItemLinkDetail?: any;
 }
 
 export interface TabConfigProps {

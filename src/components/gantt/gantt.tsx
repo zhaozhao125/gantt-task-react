@@ -116,6 +116,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   workFlowStatusColor, // 状态颜色
   isShowTaskTitle,
   isShowTaskLeftBar,
+  systemItemLinkDetail,
 }) => {
   logger("locale", locale);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -881,6 +882,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           <GanttConfigContext.Provider
             value={{
               ganttConfig,
+              systemItemLinkDetail,
             }}
           >
             <ConfigHandleContext.Provider
