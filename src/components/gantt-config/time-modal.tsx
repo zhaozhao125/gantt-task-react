@@ -4,15 +4,26 @@ import { ConfigHandleContext } from "../../contsxt";
 import { TimeItemProps, FieldAndItemProps } from "../../types/public-types";
 import styles from "./index.module.css";
 import { find, omit } from "lodash";
-import { OptionData, OptionGroupData } from "rc-select/lib/interface";
+// import { OptionData, OptionGroupData } from "rc-select/lib/interface";
 import useI18n from "../../lib/hooks/useI18n";
 const { Option } = Select;
 
+interface optionsInterface {
+  key: string;
+  name: string;
+  value: string;
+}
+
 const filterOption = (
   input: string,
-  option: OptionData | OptionGroupData | undefined
+  option: optionsInterface | undefined
 ): boolean => {
-  return option?.name?.toLowerCase().indexOf(input?.toLowerCase()) > -1;
+  console.log(option, "option");
+  return (
+    (option as optionsInterface)?.name
+      ?.toLowerCase()
+      .indexOf(input?.toLowerCase()) > -1
+  );
 };
 // 筛选某一类型的字段
 export const filterFields = (
@@ -131,10 +142,11 @@ const ItemModal: React.FC<ItemModalProps> = ({
       percentage: undefined,
     });
   };
+  console.log(filterFields, "filterFields");
   return (
     <Modal
       title={t("configuration.timeFieldConfiguration.timeFieldConfiguration")}
-      visible={visible}
+      open={visible}
       onOk={handleConfirm}
       onCancel={handleCancel}
       confirmLoading={confirmLoading}

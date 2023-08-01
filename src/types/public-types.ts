@@ -196,6 +196,7 @@ export interface FieldsTypeProps extends OptionsProp {
   [propName: string]: any;
 }
 export interface FieldAndItemProps extends OptionsProp {
+  name: string;
   fieldType?: FieldsTypeProps;
   icon?: string;
 }

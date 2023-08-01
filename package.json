@@ -1,6 +1,6 @@
 {
   "name": "proxima-gantt",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -74,7 +74,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "@projectproxima/proxima-sdk-js": "^0.4.4",
-    "antd": "4.16.13",
+    "antd": "5.7.3",
     "dayjs": "^1.10.5",
     "jsplumb": "^2.15.6",
     "lodash": "^4.17.21",

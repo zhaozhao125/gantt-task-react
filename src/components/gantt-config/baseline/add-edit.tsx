@@ -80,7 +80,7 @@ export const AddEdit: React.FC<ModalProps> = ({
           ? t("configuration.baseLineConfiguration.newBaseline")
           : t("configuration.baseLineConfiguration.editBaseline")
       }
-      visible={modalVisible}
+      open={modalVisible}
       onCancel={handleCancel}
       onOk={confirmOk}
       confirmLoading={confirmLoading}

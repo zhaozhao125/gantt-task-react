@@ -31,7 +31,7 @@ export const GuideModal: React.FC<ModaProps> = ({
   return (
     <Modal
       closable={false}
-      visible={modalVisible}
+      open={modalVisible}
       footer={null}
       width={300}
       className="guide-modal"
