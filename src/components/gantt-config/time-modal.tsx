@@ -4,7 +4,6 @@ import { ConfigHandleContext } from "../../contsxt";
 import { TimeItemProps, FieldAndItemProps } from "../../types/public-types";
 import styles from "./index.module.css";
 import { find, omit } from "lodash";
-// import { OptionData, OptionGroupData } from "rc-select/lib/interface";
 import useI18n from "../../lib/hooks/useI18n";
 const { Option } = Select;
 
