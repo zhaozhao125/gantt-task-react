@@ -18,7 +18,6 @@ const filterOption = (
   input: string,
   option: optionsInterface | undefined
 ): boolean => {
-  console.log(option, "option");
   return (
     (option as optionsInterface)?.name
       ?.toLowerCase()
@@ -142,7 +141,6 @@ const ItemModal: React.FC<ItemModalProps> = ({
       percentage: undefined,
     });
   };
-  console.log(filterFields, "filterFields");
   return (
     <Modal
       title={t("configuration.timeFieldConfiguration.timeFieldConfiguration")}
